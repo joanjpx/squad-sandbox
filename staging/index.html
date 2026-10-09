@@ -1,1 +1,23 @@
-<!doctype html><title>squad-sandbox</title><p>Not deployed yet.</p>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Squad Sandbox Calculator</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <main>
+      <h1>Squad Sandbox Calculator</h1>
+      <form id="calc">
+        <label>First number <input id="a" name="a" type="number" required></label>
+        <label>Second number <input id="b" name="b" type="number" required></label>
+        <div class="actions">
+          <button type="submit" data-op="add">Add</button>
+        </div>
+      </form>
+      <p>Result: <output id="result" aria-live="polite">—</output></p>
+    </main>
+    <script type="module" src="src/app.js"></script>
+  </body>
+</html>
