@@ -1,3 +1,4 @@
+# Contract: templates/github-actions/ in joanjpx/ai-sdlc-squad
 # Dispatched by the AI SDLC Squad DevOps Agent only after a human approved
 # STAGING -> PRODUCTION. Publishes the app at the root of the Pages site,
 # leaving /staging/ untouched.

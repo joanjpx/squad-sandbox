@@ -1,3 +1,4 @@
+# Contract: templates/github-actions/ in joanjpx/ai-sdlc-squad
 # Dispatched by the AI SDLC Squad DevOps Agent in the ROLLBACK state:
 # republishes the app at `to_ref` (the last good release) to the environment.
 name: Roll back

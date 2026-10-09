@@ -1,3 +1,4 @@
+# Contract: templates/github-actions/ in joanjpx/ai-sdlc-squad
 # Dispatched by the AI SDLC Squad DevOps Agent on the feature branch.
 # Publishes the app under /staging/ of the GitHub Pages site.
 name: Deploy to staging
