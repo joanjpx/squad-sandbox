@@ -1,0 +1,9 @@
+{
+  "name": "squad-sandbox",
+  "private": true,
+  "type": "module",
+  "description": "Sandbox target app for the AI SDLC Squad end-to-end test.",
+  "scripts": {
+    "test": "node --test"
+  }
+}

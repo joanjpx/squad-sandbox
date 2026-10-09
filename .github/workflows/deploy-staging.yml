@@ -1,0 +1,70 @@
+# Dispatched by the AI SDLC Squad DevOps Agent on the feature branch.
+# Publishes the app under /staging/ of the GitHub Pages site.
+name: Deploy to staging
+
+on:
+  workflow_dispatch:
+    inputs:
+      jira_key:
+        description: Jira issue being delivered
+        required: false
+        type: string
+      workflow_id:
+        description: AI SDLC Squad workflow ID
+        required: false
+        type: string
+
+permissions:
+  contents: write # push the site to the gh-pages branch
+  pages: write
+  id-token: write # OIDC for actions/deploy-pages
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}staging/
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Test
+        run: npm test
+
+      - name: Check out site
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: site
+
+      - name: Publish to staging
+        env:
+          JIRA_KEY: ${{ inputs.jira_key }}
+        run: |
+          rm -rf site/staging
+          mkdir -p site/staging
+          cp -r index.html style.css src site/staging/
+          echo "$GITHUB_SHA" > site/staging/version.txt
+          cd site
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "deploy staging $GITHUB_SHA $JIRA_KEY" || echo "No changes"
+          git push origin HEAD:gh-pages
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
